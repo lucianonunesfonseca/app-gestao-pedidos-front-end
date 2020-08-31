@@ -9,11 +9,8 @@ import { Injectable } from "@angular/core";
 export class ClienteService {
   constructor(public httpClient: HttpClient, public storage: StorageService) {}
   findByEmail(email: string): Observable<ClienteDTO> {
-    let tokem = this.storage.getLocalUser().token;
-    let authHeader = new HttpHeaders({ Authorization: "Bearer " + tokem });
     return this.httpClient.get<ClienteDTO>(
-      `${API_CONFIG.baseUrl}/clientes/email?value=${email}`,
-      { headers: authHeader }
+      `${API_CONFIG.baseUrl}/clientes/email?value=${email}`
     );
   }
   getImageFromBucket(id: string): Observable<any> {
