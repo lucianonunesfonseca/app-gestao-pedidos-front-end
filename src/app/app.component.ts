@@ -1,3 +1,4 @@
+import { AuthService } from "./../services/auth.service";
 import { CategoriasPage } from "./../pages/categorias/categorias";
 import { ProfilePage } from "./../pages/profile/profile";
 import { Component, ViewChild } from "@angular/core";
@@ -18,7 +19,8 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public authservice: AuthService
   ) {
     this.initializeApp();
 
@@ -26,6 +28,7 @@ export class MyApp {
     this.pages = [
       { title: "Profile", component: "ProfilePage" },
       { title: "Categorias", component: "CategoriasPage" },
+      { title: "Logout", component: "" },
     ];
   }
 
@@ -38,9 +41,15 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  openPage(page: { title: string; component: string }) {
+    switch (page.title) {
+      case "Logout":
+        this.authservice.logout();
+        this.nav.setRoot("HomePage");
+        break;
+
+      default:
+        this.nav.setRoot(page.component);
+    }
   }
 }

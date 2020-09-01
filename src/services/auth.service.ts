@@ -17,6 +17,17 @@ export class AuthService {
       responseType: "text",
     });
   }
+
+  refreshToken() {
+    return this.httpClient.post(
+      `${API_CONFIG.baseUrl}/auth/refresh_token`,
+      {},
+      {
+        observe: "response",
+        responseType: "text",
+      }
+    );
+  }
   successfullLogin(authorizationValue: string) {
     let tok = authorizationValue.substring(7);
     let user: LocalUser = {
