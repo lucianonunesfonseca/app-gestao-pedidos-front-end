@@ -1,3 +1,4 @@
+import { ProdutoDto } from "./../../models/produto.dto";
 import { CartService } from "./../../services/domain/cart.service";
 import { ProdutoService } from "./../../services/domain/produto.service";
 import { CartItem } from "./../../models/cart-item";
@@ -43,5 +44,20 @@ export class CartPage {
         (error) => {}
       );
     }
+  }
+  removeItem(produto: ProdutoDto) {
+    this.items = this.cartService.removeProduto(produto).items;
+  }
+  increaseQuantity(produto: ProdutoDto) {
+    this.items = this.cartService.increaseQuantity(produto).items;
+  }
+  decreaseQuantity(produto: ProdutoDto) {
+    this.items = this.cartService.decreaseQuantity(produto).items;
+  }
+  total(): number {
+    return this.cartService.total();
+  }
+  goOn() {
+    this.navCtrl.setRoot("CategoriasPage");
   }
 }
