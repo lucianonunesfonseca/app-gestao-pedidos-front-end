@@ -13,6 +13,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { ClienteService } from "../services/domain/cliente.service";
 import { AuthInterceptorProvider } from "../interceptors/auth-interceptor";
+import { ProdutoService } from "../services/domain/produto.service";
 
 @NgModule({
   declarations: [MyApp],
@@ -27,6 +28,7 @@ import { AuthInterceptorProvider } from "../interceptors/auth-interceptor";
     AuthService,
     StorageService,
     ClienteService,
+    ProdutoService,
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
   ],
