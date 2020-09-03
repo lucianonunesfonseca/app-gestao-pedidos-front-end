@@ -19,8 +19,8 @@
       <ion-icon name="cart"></ion-icon>
     </button>
   </ion-fab>
-  <ion-list *ngFor="let item of items" (click)="showProdutos(item.id)">
-    <button ion-item>
+  <ion-list>
+    <button ion-item *ngFor="let item of items" (click)="showProdutos(item.id)">
       <ion-thumbnail>
         <img src="{{bucketUrl}}/cat{{item.id}}.jpg" />
       </ion-thumbnail>

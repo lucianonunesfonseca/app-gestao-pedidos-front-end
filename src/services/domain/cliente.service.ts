@@ -8,8 +8,8 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class ClienteService {
   constructor(public httpClient: HttpClient, public storage: StorageService) {}
-  findByEmail(email: string): Observable<ClienteDTO> {
-    return this.httpClient.get<ClienteDTO>(
+  findByEmail(email: string) {
+    return this.httpClient.get(
       `${API_CONFIG.baseUrl}/clientes/email?value=${email}`
     );
   }
