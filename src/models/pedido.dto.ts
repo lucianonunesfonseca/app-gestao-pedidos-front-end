@@ -3,7 +3,7 @@ import { PagamentoDTO } from "./pagamento.dto";
 import { RefDTO } from "./ret.dto";
 export interface PedidoDTO {
   cliente: RefDTO;
-  endereco: RefDTO;
+  enderecoDeEntrega: RefDTO;
   pagamento: PagamentoDTO;
-  items: ItemPedidoDTO[];
+  itens: ItemPedidoDTO[];
 }

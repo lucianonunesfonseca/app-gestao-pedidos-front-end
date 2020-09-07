@@ -3,7 +3,12 @@ import { ProdutoService } from "./../../services/domain/produto.service";
 import { CategoriaService } from "./../../services/domain/categoria.service";
 import { ProdutoDto } from "./../../models/produto.dto";
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  LoadingController,
+} from "ionic-angular";
 
 /**
  * Generated class for the ProdutosPage page.
@@ -23,17 +28,22 @@ export class ProdutosPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public produtoService: ProdutoService,
-    public categoriaService: CategoriaService
+    public categoriaService: CategoriaService,
+    public loadingCtrl: LoadingController
   ) {}
 
   ionViewDidLoad() {
     let categoria_id = this.navParams.get("categoria_id");
+    let loading = this.presentLoading();
     this.produtoService.findByCategoria(categoria_id).subscribe(
       (response) => {
         this.items = response["content"];
+        loading.dismiss();
         this.loadImageUrls();
       },
-      (error) => {}
+      (error) => {
+        loading.dismiss();
+      }
     );
   }
   loadImageUrls() {
@@ -49,5 +59,12 @@ export class ProdutosPage {
   }
   showDetails(produto_id: string) {
     this.navCtrl.push("ProdutoDetailPage", { produto_id: produto_id });
+  }
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: " Favor aguarde ...",
+    });
+    loader.present();
+    return loader;
   }
 }
